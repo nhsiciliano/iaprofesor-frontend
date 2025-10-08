@@ -16,15 +16,15 @@ import Link from "next/link";
 export function Header() {
   const navItems = [
     {
-      name: "Features",
+      name: "Características",
       link: "#features",
     },
     {
-      name: "Pricing",
-      link: "#pricing",
+      name: "Razón",
+      link: "#reason",
     },
     {
-      name: "Contact",
+      name: "Contacto",
       link: "#contact",
     },
   ];
@@ -110,4 +110,3 @@ export function Header() {
     </div>
   );
 }
-
