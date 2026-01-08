@@ -24,11 +24,12 @@ import {
 } from '@/components/analytics/StatCards';
 
 // Import API functions and types
-import {
+import { 
   getAnalyticsData,
   getUserStats,
   useApiCall
 } from '@/lib/api';
+import { getSubjectColor, getSubjectLabel } from '@/lib/subjects';
 import type {
   AnalyticsData,
   UserStats,
@@ -273,10 +274,9 @@ export default function AnalyticsPage() {
             <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700">
               <SubjectBreakdownChart
                 data={analyticsData.subjectBreakdown.map(subject => ({
-                  label: subject.subject,
+                  label: getSubjectLabel(subject.subject),
                   value: subject.progress,
-                  color: subject.subject === 'Matemática' ? '#3b82f6' : 
-                         subject.subject === 'Historia' ? '#f59e0b' : '#10b981'
+                  color: getSubjectColor(subject.subject)
                 }))}
                 title="Progreso por Materia"
               />
@@ -292,7 +292,7 @@ export default function AnalyticsPage() {
               {analyticsData.subjectBreakdown.map((subject) => (
                 <SubjectProgressCard
                   key={subject.subject}
-                  subject={subject.subject}
+                  subject={getSubjectLabel(subject.subject)}
                   progress={subject.progress}
                   sessions={subject.sessions}
                   lastActivity={new Date(subject.lastActivity).toLocaleDateString('es-ES')}

@@ -1,5 +1,19 @@
 import type { Metadata, Viewport } from "next";
+import { IBM_Plex_Sans, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  display: "swap",
+});
+
+const plexSans = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-body",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'),
@@ -98,6 +112,8 @@ export const viewport: Viewport = {
 };
 
 import { AuthProvider } from "@/context/AuthContext";
+import { Toaster } from "@/components/ui/sonner";
+import { GlobalErrorBoundary } from "@/components/error";
 
 export default function RootLayout({
   children,
@@ -106,8 +122,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="font-sans antialiased">
-        <AuthProvider>{children}</AuthProvider>
+      <body className={`${spaceGrotesk.variable} ${plexSans.variable} antialiased`}>
+        <AuthProvider>
+          <GlobalErrorBoundary>
+            {children}
+          </GlobalErrorBoundary>
+          <Toaster />
+        </AuthProvider>
       </body>
     </html>
   );

@@ -7,12 +7,14 @@ import {
   IconSettings,
   IconUserBolt,
   IconChartBar,
-  IconLogout
+  IconLogout,
+  IconNote,
 } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import { useUser } from "@/hooks/useUser";
 
 export default function ProtectedLayout({
   children,
@@ -20,6 +22,7 @@ export default function ProtectedLayout({
   children: React.ReactNode;
 }) {
   const { user, signOut } = useAuth();
+  const { isAdmin } = useUser();
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
@@ -57,7 +60,24 @@ export default function ProtectedLayout({
         <IconSettings className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
       ),
     },
+    {
+      label: "Mis Notas",
+      href: "/notes",
+      icon: (
+        <IconNote className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
+      ),
+    },
   ];
+
+  if (isAdmin) {
+    links.push({
+      label: "Panel Admin",
+      href: "/admin/subjects",
+      icon: (
+        <IconUserBolt className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200 text-red-500" />
+      ),
+    });
+  }
 
   const handleSignOut = async () => {
     try {

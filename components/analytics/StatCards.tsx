@@ -19,6 +19,7 @@ import type {
   ProgressSummary 
 } from '@/lib/types';
 import { cn } from '@/lib/utils';
+import { getSubjectIcon, getSubjectLabel } from '@/lib/subjects';
 
 // ==================== STAT CARD COMPONENT ====================
 
@@ -403,10 +404,7 @@ export const SubjectProgressCard: React.FC<{
   trending,
   className 
 }) => {
-  const getSubjectIcon = () => {
-    // Esta función podría expandirse para incluir íconos específicos por materia
-    return <IconBrain className="h-5 w-5" />;
-  };
+  const subjectIcon = getSubjectIcon(subject);
 
   const getSkillLevelColor = (level: string) => {
     switch (level.toLowerCase()) {
@@ -427,13 +425,13 @@ export const SubjectProgressCard: React.FC<{
         className
       )}
     >
-      <div className="flex items-start justify-between mb-4">
-        <div className="flex items-center gap-3">
-          {getSubjectIcon()}
-          <div>
-            <h3 className="font-semibold text-slate-800 dark:text-slate-200">
-              {subject}
-            </h3>
+        <div className="flex items-start justify-between mb-4">
+          <div className="flex items-center gap-3">
+          {subjectIcon}
+            <div>
+              <h3 className="font-semibold text-slate-800 dark:text-slate-200">
+              {getSubjectLabel(subject)}
+              </h3>
             <div className="flex items-center gap-2 mt-1">
               <span className={cn(
                 "text-xs px-2 py-1 rounded-full font-medium",

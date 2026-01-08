@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ContainerScroll } from "../ui/container-scroll-animation";
 import tutorMock from "@/public/tutorai.png";
 
@@ -25,6 +26,17 @@ export function TutorScrollDemo() {
               y seguimiento de cada sesión. El tutor IA adapta el tono y la dificultad según las
               respuestas del estudiante.
             </p>
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-left text-sm text-slate-200">
+              <p className="font-semibold text-white">Ejemplo real</p>
+              <p className="mt-2 text-slate-300">Tutor: ¿Que dato necesitas primero para resolverlo?</p>
+              <p className="text-slate-400">Alumno: La velocidad inicial del movimiento.</p>
+            </div>
+            <Link
+              href="/register"
+              className="inline-flex items-center justify-center rounded-full bg-white/10 px-5 py-2 text-sm font-semibold text-white transition hover:bg-white/20"
+            >
+              Probar una sesion
+            </Link>
           </div>
         }
       >

@@ -2,6 +2,7 @@
 import React from "react";
 import { ContainerScroll } from "../ui/container-scroll-animation";
 import Image from "next/image";
+import Link from "next/link";
 import dashboardMock from "@/public/dashboardai.png";
 
 export function DashboardScrollDemo() {
@@ -25,6 +26,23 @@ export function DashboardScrollDemo() {
               para equipos pedagógicos. IA Profesor traduce la actividad del tutor en información
               accionable para acompañar cada aprendizaje.
             </p>
+            <div className="flex flex-wrap gap-3 text-xs text-slate-200">
+              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
+                +38% practica guiada
+              </span>
+              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
+                Alertas de brechas por materia
+              </span>
+              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
+                Seguimiento de objetivos
+              </span>
+            </div>
+            <Link
+              href="/register"
+              className="inline-flex items-center justify-center rounded-full border border-white/20 px-5 py-2 text-sm font-semibold text-white/90 transition hover:border-white/50 hover:text-white"
+            >
+              Explorar analytics
+            </Link>
           </div>
         }
       >
@@ -39,6 +57,12 @@ export function DashboardScrollDemo() {
             draggable={false}
             priority
           />
+          <div className="absolute left-6 top-6 hidden rounded-2xl border border-white/15 bg-black/60 px-4 py-3 text-xs text-white/90 backdrop-blur md:block">
+            Progreso por materia
+          </div>
+          <div className="absolute right-6 bottom-6 hidden rounded-2xl border border-white/15 bg-black/60 px-4 py-3 text-xs text-white/90 backdrop-blur md:block">
+            Deteccion de brechas
+          </div>
         </div>
       </ContainerScroll>
     </div>

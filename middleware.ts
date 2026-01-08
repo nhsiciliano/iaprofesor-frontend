@@ -59,7 +59,19 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   // Protected routes
-  const protectedRoutes = ['/dashboard', '/profile', '/tutor']
+  const protectedRoutes = [
+    '/dashboard',
+    '/profile',
+    '/tutor',
+    '/analytics',
+    '/goals',
+    '/history',
+    '/settings',
+    '/notes',
+    '/achievements',
+    '/learning-paths',
+    '/admin',
+  ]
   // Public routes que no deberían ser accesibles si ya está autenticado
   const authRoutes = ['/login', '/register']
 

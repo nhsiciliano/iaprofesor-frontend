@@ -20,7 +20,17 @@ import {
 import { PathsOverview, PathsGrid } from '@/components/learning-paths/LearningPathSystem';
 import type { LearningPath, UserPathProgress, SkillLevel } from '@/lib/types';
 
-const SUBJECTS = ['Matemática', 'Historia', 'Gramática', 'Ciencias'];
+const SUBJECTS = [
+  { id: 'mathematics', label: 'Matemática' },
+  { id: 'history', label: 'Historia' },
+  { id: 'grammar', label: 'Gramática' },
+  { id: 'science', label: 'Ciencias' },
+];
+
+const SUBJECT_LABELS = SUBJECTS.reduce<Record<string, string>>((acc, subject) => {
+  acc[subject.id] = subject.label;
+  return acc;
+}, {});
 const DIFFICULTIES: SkillLevel[] = ['beginner', 'intermediate', 'advanced', 'expert'];
 
 export default function LearningPathsPage() {
@@ -80,11 +90,13 @@ export default function LearningPathsPage() {
 
     // Search filter
     if (searchQuery.trim()) {
+      const normalizedQuery = searchQuery.toLowerCase();
       filtered = filtered.filter(path =>
-        path.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        path.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        path.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        path.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+        path.title.toLowerCase().includes(normalizedQuery) ||
+        path.description.toLowerCase().includes(normalizedQuery) ||
+        path.subject.toLowerCase().includes(normalizedQuery) ||
+        (SUBJECT_LABELS[path.subject] ?? '').toLowerCase().includes(normalizedQuery) ||
+        path.tags.some(tag => tag.toLowerCase().includes(normalizedQuery))
       );
     }
 
@@ -318,15 +330,15 @@ export default function LearningPathsPage() {
                 <div className="flex flex-wrap gap-2">
                   {SUBJECTS.map(subject => (
                     <button
-                      key={subject}
-                      onClick={() => toggleSubjectFilter(subject)}
+                      key={subject.id}
+                      onClick={() => toggleSubjectFilter(subject.id)}
                       className={`px-3 py-1 rounded-full text-sm transition-colors ${
-                        selectedSubjects.includes(subject)
+                        selectedSubjects.includes(subject.id)
                           ? 'bg-indigo-600 text-white'
                           : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600'
                       }`}
                     >
-                      {subject}
+                      {subject.label}
                     </button>
                   ))}
                 </div>

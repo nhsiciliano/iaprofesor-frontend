@@ -20,6 +20,10 @@ export function Header() {
       link: "#features",
     },
     {
+      name: "Demo",
+      link: "#demo",
+    },
+    {
       name: "Razón",
       link: "#reason",
     },
@@ -32,7 +36,7 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <div className="relative w-full bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800">
+    <div className="sticky top-0 z-50 w-full border-b border-neutral-200 bg-white/90 backdrop-blur dark:border-neutral-800 dark:bg-neutral-900/80">
       <Navbar>
         {/* Desktop Navigation */}
         <NavBody>
@@ -42,13 +46,16 @@ export function Header() {
               <span className="ml-2 text-lg font-bold text-neutral-800 dark:text-white font-orbitron">IA Profesor</span>
             </div>
           </Link>
-          <NavItems items={navItems} />
+          <NavItems
+            items={navItems}
+            className="lg:static lg:inset-auto lg:mx-auto lg:flex-1 lg:justify-center"
+          />
           <div className="flex items-center gap-4">
             <Link href="/login">
               <NavbarButton as="div" variant="secondary" className="text-neutral-800 dark:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800">Iniciar Sesión</NavbarButton>
             </Link>
             <Link href="/register">
-              <NavbarButton as="div" variant="primary" className="bg-indigo-600 hover:bg-indigo-700 text-white">Comenzar ahora</NavbarButton>
+              <NavbarButton as="div" variant="primary" className="bg-indigo-600 hover:bg-indigo-700 text-white">Probar app</NavbarButton>
             </Link>
           </div>
         </NavBody>
@@ -100,7 +107,7 @@ export function Header() {
                   variant="primary"
                   className="w-full bg-indigo-600 hover:bg-indigo-700 text-white"
                 >
-                  Comenzar ahora
+                  Probar gratis
                 </NavbarButton>
               </Link>
             </div>

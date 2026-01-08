@@ -29,16 +29,45 @@ export function HowItWorksSection() {
               </svg>
             </div>
 
-            <p className="relative z-50 mb-8 text-lg font-normal text-slate-400 max-w-2xl">
-              En lugar de darte la solución, IA Profesor te hace preguntas y te da pistas para que tú mismo encuentres el camino. Es un tutor que te acompaña, no un solucionador de problemas que te reemplaza. 
-              Creemos en el poder de tu propia mente para aprender y crecer.
-            </p>
+            <div className="relative z-50 grid w-full gap-6 text-left md:grid-cols-3">
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+                <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-sm font-semibold text-white">
+                  1
+                </div>
+                <h3 className="text-lg font-semibold text-white">Diagnostico inicial</h3>
+                <p className="mt-2 text-sm text-slate-400">
+                  Identifica el punto de partida y el objetivo concreto de la sesion.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+                <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-sm font-semibold text-white">
+                  2
+                </div>
+                <h3 className="text-lg font-semibold text-white">Guia socratica</h3>
+                <p className="mt-2 text-sm text-slate-400">
+                  Preguntas, pistas y ejemplos para estimular el razonamiento propio.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+                <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-sm font-semibold text-white">
+                  3
+                </div>
+                <h3 className="text-lg font-semibold text-white">Progreso visible</h3>
+                <p className="mt-2 text-sm text-slate-400">
+                  Resumen por materia, historial de sesiones y objetivos cumplidos.
+                </p>
+              </div>
+            </div>
 
-            <Link href="/login">
-              <button className="rounded-lg border border-gray-500 px-6 py-2 text-gray-300 hover:bg-gray-800 transition-colors">
-                Prueba ahora
-              </button>
+            <Link
+              href="/login"
+              className="relative z-50 mt-8 inline-flex items-center justify-center rounded-full border border-gray-500 px-6 py-2 text-sm font-semibold text-gray-200 transition-colors hover:bg-gray-800"
+            >
+              Prueba guiada
             </Link>
+            <p className="relative z-50 mt-3 text-xs text-slate-500">
+              Sin reemplazar al docente. Alineado con objetivos educativos.
+            </p>
 
             {/* Meaty part - Meteor effect */}
             <Meteors number={30} />

@@ -16,6 +16,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
+import { getSubjectColor, getSubjectLabel } from "@/lib/subjects";
 
 // Import new components
 import { UserStatsOverview, ProgressSummaryCards } from "@/components/analytics/StatCards";
@@ -109,9 +110,9 @@ export default function DashboardPage() {
   const getSubjectProgressData = (): ChartDataPoint[] => {
     if (!dashboardData?.subjectProgress) return [];
     return dashboardData.subjectProgress.map(subject => ({
-      label: subject.subject,
+      label: getSubjectLabel(subject.subject),
       value: subject.progress,
-      color: subject.subject === 'Matemática' ? '#3b82f6' : subject.subject === 'Historia' ? '#f59e0b' : '#10b981'
+      color: getSubjectColor(subject.subject)
     }));
   };
 

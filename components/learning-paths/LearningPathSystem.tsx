@@ -23,6 +23,37 @@ import type {
 } from '@/lib/types';
 import { cn } from '@/lib/utils';
 
+const SUBJECT_LABELS: Record<string, string> = {
+  mathematics: 'Matemática',
+  history: 'Historia',
+  grammar: 'Gramática',
+  science: 'Ciencias',
+};
+
+const SUBJECT_STYLES: Record<string, { icon: React.ReactNode; gradient: string }> = {
+  mathematics: {
+    icon: <IconTarget className="h-5 w-5" />,
+    gradient: "bg-gradient-to-r from-blue-500 to-cyan-500",
+  },
+  history: {
+    icon: <IconBook className="h-5 w-5" />,
+    gradient: "bg-gradient-to-r from-amber-500 to-orange-500",
+  },
+  grammar: {
+    icon: <IconBrain className="h-5 w-5" />,
+    gradient: "bg-gradient-to-r from-emerald-500 to-teal-500",
+  },
+  science: {
+    icon: <IconRocket className="h-5 w-5" />,
+    gradient: "bg-gradient-to-r from-purple-500 to-pink-500",
+  },
+};
+
+const DEFAULT_SUBJECT_STYLE = {
+  icon: <IconBook className="h-5 w-5" />,
+  gradient: "bg-gradient-to-r from-purple-500 to-pink-500",
+};
+
 // ==================== PATH CARD COMPONENT ====================
 
 export const PathCard: React.FC<PathCardProps> = ({
@@ -49,14 +80,7 @@ export const PathCard: React.FC<PathCardProps> = ({
   };
 
   const getSubjectIcon = () => {
-    const iconMap = {
-      'Matemática': <IconTarget className="h-5 w-5" />,
-      'Historia': <IconBook className="h-5 w-5" />,
-      'Gramática': <IconBrain className="h-5 w-5" />,
-      'Ciencias': <IconRocket className="h-5 w-5" />,
-    };
-    
-    return iconMap[path.subject as keyof typeof iconMap] || <IconBook className="h-5 w-5" />;
+    return (SUBJECT_STYLES[path.subject] ?? DEFAULT_SUBJECT_STYLE).icon;
   };
 
   if (variant === 'compact') {
@@ -115,10 +139,7 @@ export const PathCard: React.FC<PathCardProps> = ({
         {/* Header with gradient based on subject */}
         <div className={cn(
           "h-2",
-          path.subject === 'Matemática' && "bg-gradient-to-r from-blue-500 to-cyan-500",
-          path.subject === 'Historia' && "bg-gradient-to-r from-amber-500 to-orange-500",
-          path.subject === 'Gramática' && "bg-gradient-to-r from-emerald-500 to-teal-500",
-          !['Matemática', 'Historia', 'Gramática'].includes(path.subject) && "bg-gradient-to-r from-purple-500 to-pink-500"
+          (SUBJECT_STYLES[path.subject] ?? DEFAULT_SUBJECT_STYLE).gradient
         )} />
 
         <CardHeader className="pb-4">
@@ -127,7 +148,7 @@ export const PathCard: React.FC<PathCardProps> = ({
               <div className="flex items-center gap-2 mb-2">
                 {getSubjectIcon()}
                 <span className="text-sm font-medium text-slate-600 dark:text-slate-400">
-                  {path.subject}
+                  {SUBJECT_LABELS[path.subject] ?? path.subject}
                 </span>
                 
                 {path.isRecommended && (
@@ -240,37 +261,12 @@ export const PathCard: React.FC<PathCardProps> = ({
 
           {/* Action Buttons */}
           <div className="flex gap-3 pt-4 border-t border-slate-200 dark:border-slate-700">
-            {!isEnrolled ? (
-              <button
-                onClick={() => onEnroll?.(path.id)}
-                className="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium text-sm flex items-center justify-center gap-2"
-              >
-                <IconPlayerPlay className="h-4 w-4" />
-                Comenzar
-              </button>
-            ) : isCompleted ? (
-              <button
-                onClick={() => onView?.(path.id)}
-                className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium text-sm flex items-center justify-center gap-2"
-              >
-                <IconCheck className="h-4 w-4" />
-                Completado
-              </button>
-            ) : (
-              <button
-                onClick={() => onContinue?.(path.id)}
-                className="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium text-sm flex items-center justify-center gap-2"
-              >
-                <IconPlayerPlay className="h-4 w-4" />
-                Continuar
-              </button>
-            )}
-            
             <button
-              onClick={() => onView?.(path.id)}
-              className="px-4 py-2 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors font-medium text-sm"
+              disabled
+              className="flex-1 px-4 py-2 bg-slate-200 text-slate-500 dark:bg-slate-700 dark:text-slate-400 rounded-lg font-medium text-sm flex items-center justify-center gap-2 cursor-not-allowed"
             >
-              Ver Detalles
+              <IconPlayerPlay className="h-4 w-4" />
+              Proximamente
             </button>
           </div>
         </CardContent>

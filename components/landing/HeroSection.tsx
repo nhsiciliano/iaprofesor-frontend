@@ -22,20 +22,45 @@ export function HeroSection() {
           }}
           className="text-4xl font-bold md:text-5xl text-neutral-700 dark:text-white"
         >
-          Potencia tu aprendizaje,{" "}
-          <Highlight>no lo reemplaces</Highlight>
+          Aprende a razonar con{" "}
+          <Highlight>IA que guia</Highlight>
+          {" "}cada paso.
         </motion.h1>
         <p className="mt-4 text-lg text-neutral-700 dark:text-white">
-          IA Profesor es tu guía personal para resolver problemas. No te damos las respuestas, te ayudamos a pensar y a construir tu propio camino hacia la solución.
+          IA Profesor acompana con preguntas, pistas y seguimiento por materia para
+          que el alumno llegue a la solucion por si mismo.
         </p>
-        <div className="mt-8">
-          <Link 
+        <ul className="mt-6 flex flex-col items-center gap-3 text-sm text-neutral-600 dark:text-neutral-200 sm:flex-row sm:justify-center">
+          <li className="flex items-center gap-2">
+            <span className="inline-flex h-2 w-2 rounded-full bg-indigo-500" />
+            Practica guiada en tiempo real
+          </li>
+          <li className="flex items-center gap-2">
+            <span className="inline-flex h-2 w-2 rounded-full bg-amber-500" />
+            Seguimiento por materia y objetivos
+          </li>
+          <li className="flex items-center gap-2">
+            <span className="inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+            Enfoque socratico, no respuestas
+          </li>
+        </ul>
+        <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <Link
             href="/register"
-            className="inline-block px-8 py-3 font-bold text-white bg-indigo-600 rounded-full hover:bg-indigo-700 transition-colors duration-200"
+            className="inline-flex items-center justify-center rounded-full bg-indigo-600 px-8 py-3 font-bold text-white transition-colors hover:bg-indigo-700"
           >
-            Comienza ahora
+            Probar gratis
+          </Link>
+          <Link
+            href="#demo"
+            className="inline-flex items-center justify-center rounded-full border border-neutral-300 px-8 py-3 font-semibold text-neutral-700 transition-colors hover:border-neutral-400 hover:text-neutral-900 dark:border-neutral-600 dark:text-neutral-100 dark:hover:border-neutral-400"
+          >
+            Ver tutor en accion
           </Link>
         </div>
+        <p className="mt-6 text-sm text-neutral-500 dark:text-neutral-300">
+          Disenado para escuelas, academias y clases particulares.
+        </p>
       </main>
     </HeroHighlight>
   );
