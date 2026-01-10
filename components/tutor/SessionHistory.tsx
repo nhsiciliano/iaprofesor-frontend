@@ -7,8 +7,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { 
   IconSearch, 
   IconMessage, 
-  IconCalendar, 
-  IconRobot 
+  IconCalendar,
 } from "@tabler/icons-react";
 import { getUserSessions, ChatSession } from "@/lib/api";
 import { getSubjectIcon, getSubjectLabel } from "@/lib/subjects";

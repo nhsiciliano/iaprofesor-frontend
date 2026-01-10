@@ -47,7 +47,7 @@ const SUBJECT_COLORS: Record<string, string> = {
   general: '#94a3b8',
 };
 
-const SUBJECT_ICONS: Record<string, (props: { className?: string }) => JSX.Element> = {
+const SUBJECT_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   mathematics: IconCalculator,
   history: IconBook,
   grammar: IconPencil,

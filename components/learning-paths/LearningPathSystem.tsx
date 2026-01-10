@@ -59,8 +59,6 @@ const DEFAULT_SUBJECT_STYLE = {
 export const PathCard: React.FC<PathCardProps> = ({
   path,
   userProgress,
-  onEnroll,
-  onContinue,
   onView,
   className,
   variant = 'default'
