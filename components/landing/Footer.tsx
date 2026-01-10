@@ -5,6 +5,7 @@ const footerNav = [
   { name: 'Características', href: '#features' },
   { name: 'Razón', href: '#reason' },
   { name: 'Contacto', href: '#contact' },
+  { name: 'Privacidad', href: '/privacy' },
 ];
 
 export function Footer() {
