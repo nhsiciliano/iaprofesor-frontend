@@ -58,7 +58,7 @@ export function ContactSection() {
               <ContactCard
                 icon={<IconPhone className="h-5 w-5" />}
                 title="WhatsApp"
-                description="+54 9 11 5555 1234"
+                description="+54 9 11 3155 2925"
               />
               <ContactCard
                 icon={<IconMapPin className="h-5 w-5" />}

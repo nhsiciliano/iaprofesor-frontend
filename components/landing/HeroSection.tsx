@@ -23,11 +23,11 @@ export function HeroSection() {
           className="text-4xl font-bold md:text-5xl text-neutral-700 dark:text-white"
         >
           Aprende a razonar con{" "}
-          <Highlight>IA que guia</Highlight>
-          {" "}cada paso.
+          <Highlight>IA que guia
+          cada paso.</Highlight>{" "}
         </motion.h1>
         <p className="mt-4 text-lg text-neutral-700 dark:text-white">
-          IA Profesor acompana con preguntas, pistas y seguimiento por materia para
+          IA Profesor acompaña con preguntas, pistas y seguimiento por materia para
           que el alumno llegue a la solucion por si mismo.
         </p>
         <ul className="mt-6 flex flex-col items-center gap-3 text-sm text-neutral-600 dark:text-neutral-200 sm:flex-row sm:justify-center">
@@ -53,7 +53,7 @@ export function HeroSection() {
           </Link>
           <Link
             href="#demo"
-            className="inline-flex items-center justify-center rounded-full border border-neutral-300 px-8 py-3 font-semibold text-neutral-700 transition-colors hover:border-neutral-400 hover:text-neutral-900 dark:border-neutral-600 dark:text-neutral-100 dark:hover:border-neutral-400"
+            className="inline-flex items-center justify-center rounded-full border border-neutral-300 px-8 py-3 font-semibold text-neutral-700 transition-colors hover:border-neutral-400 hover:text-neutral-600 dark:border-neutral-600 dark:text-neutral-100 dark:hover:border-neutral-400"
           >
             Ver tutor en accion
           </Link>
