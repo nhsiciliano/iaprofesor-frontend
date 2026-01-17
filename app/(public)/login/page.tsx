@@ -3,7 +3,6 @@ import React, { Suspense, useState, useEffect } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { IconBrandGoogle, IconEye, IconEyeOff } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
@@ -11,12 +10,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 function LoginContent() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [error, setError] = useState("");
-  const { login, loginWithProvider, session } = useAuth();
+  const [success, setSuccess] = useState("");
+  const { sendMagicLink, session } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
   
@@ -33,48 +30,52 @@ function LoginContent() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    if (!email || !password) {
-      setError("Por favor, completa todos los campos");
+    if (!email) {
+      setError("Por favor, ingresa tu correo");
       return;
     }
 
     setIsLoading(true);
     setError("");
-
-    try {
-      await login(email, password);
-      // Redirigir a la URL de destino o dashboard por defecto
-      router.push(redirectTo);
-    } catch (error: unknown) {
-      console.error("Error de login:", error);
-      const message = error instanceof Error ? error.message : "Error al iniciar sesión. Verifica tus credenciales.";
-      setError(message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleGoogleLogin = async () => {
-    setError("");
-    setIsGoogleLoading(true);
+    setSuccess("");
 
     try {
       const origin = typeof window !== "undefined" ? window.location.origin : undefined;
       const callbackUrl = origin
         ? `${origin}/auth/callback?next=${encodeURIComponent(redirectTo)}`
         : undefined;
-
-      await loginWithProvider('google', {
-        redirectTo: callbackUrl,
-      });
-      // Supabase manejará la redirección. En caso de que no lo haga, el listener de sesión lo hará.
+      await sendMagicLink(email, callbackUrl);
+      setSuccess("Te enviamos un enlace para el ingreso a tu correo.");
     } catch (error: unknown) {
-      console.error("Error al iniciar sesión con Google:", error);
-      const message = error instanceof Error ? error.message : "No se pudo iniciar sesión con Google.";
+      console.error("Error de login:", error);
+      const message = error instanceof Error ? error.message : "Error al enviar el enlace. Intentalo nuevamente.";
       setError(message);
-      setIsGoogleLoading(false);
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  // Login con Google (pausado temporalmente)
+  // const handleGoogleLogin = async () => {
+  //   setError("");
+  //   setIsGoogleLoading(true);
+  //
+  //   try {
+  //     const origin = typeof window !== "undefined" ? window.location.origin : undefined;
+  //     const callbackUrl = origin
+  //       ? `${origin}/auth/callback?next=${encodeURIComponent(redirectTo)}`
+  //       : undefined;
+  //
+  //     await loginWithProvider('google', {
+  //       redirectTo: callbackUrl,
+  //     });
+  //   } catch (error: unknown) {
+  //     console.error("Error al iniciar sesión con Google:", error);
+  //     const message = error instanceof Error ? error.message : "No se pudo iniciar sesión con Google.";
+  //     setError(message);
+  //     setIsGoogleLoading(false);
+  //   }
+  // };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 dark:bg-neutral-900 px-4">
@@ -104,6 +105,11 @@ function LoginContent() {
             {error}
           </div>
         )}
+        {success && (
+          <div className="p-4 text-sm text-green-600 bg-green-50 border border-green-200 rounded-md dark:bg-green-900/20 dark:text-green-400 dark:border-green-800">
+            {success}
+          </div>
+        )}
 
         <form className="space-y-6" onSubmit={handleSubmit}>
           <LabelInputContainer>
@@ -121,52 +127,22 @@ function LoginContent() {
               required
             />
           </LabelInputContainer>
-          
-          <LabelInputContainer>
-            <Label htmlFor="password">Contraseña</Label>
-            <div className="relative">
-              <Input
-                id="password"
-                placeholder="••••••••"
-                type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                  if (error) setError(""); // Limpiar error al escribir
-                }}
-                disabled={isLoading}
-                required
-                className="pr-10"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
-                disabled={isLoading}
-              >
-                {showPassword ? (
-                  <IconEyeOff className="h-5 w-5" />
-                ) : (
-                  <IconEye className="h-5 w-5" />
-                )}
-              </button>
-            </div>
-          </LabelInputContainer>
 
           <button
             className="w-full h-10 rounded-md bg-indigo-600 font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
             type="submit"
-            disabled={isLoading || !email || !password}
+            disabled={isLoading || !email}
           >
             {isLoading ? (
               <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
             ) : (
-              "Iniciar sesión"
+              "Enviar enlace"
             )}
           </button>
         </form>
 
-        <div className="relative my-6">
+        {/* Acceso con Google (pausado temporalmente) */}
+        {/* <div className="relative my-6">
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-gray-300 dark:border-neutral-600" />
           </div>
@@ -191,7 +167,7 @@ function LoginContent() {
             )}
             <span>{isGoogleLoading ? 'Conectando…' : 'Google'}</span>
           </button>
-        </div>
+        </div> */}
         
         <div className="text-sm text-center text-neutral-600 dark:text-neutral-400">
           ¿No tienes una cuenta?{' '}

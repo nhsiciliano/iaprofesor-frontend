@@ -114,6 +114,7 @@ export const viewport: Viewport = {
 import { AuthProvider } from "@/context/AuthContext";
 import { Toaster } from "@/components/ui/sonner";
 import { GlobalErrorBoundary } from "@/components/error";
+import { ThemeProvider } from "next-themes";
 
 export default function RootLayout({
   children,
@@ -121,14 +122,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${spaceGrotesk.variable} ${plexSans.variable} antialiased`}>
-        <AuthProvider>
-          <GlobalErrorBoundary>
-            {children}
-          </GlobalErrorBoundary>
-          <Toaster />
-        </AuthProvider>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          <AuthProvider>
+            <GlobalErrorBoundary>
+              {children}
+            </GlobalErrorBoundary>
+            <Toaster />
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -3,15 +3,14 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import type { Session, User } from '@supabase/supabase-js'
 import { useRouter } from 'next/navigation'
-import { getSession, onAuthStateChange, signOut as authSignOut, login as authLogin, signUp as authSignUp, signInWithProvider } from '@/lib/auth'
+import { getSession, onAuthStateChange, signOut as authSignOut, sendMagicLink as authSendMagicLink, signInWithProvider } from '@/lib/auth'
 import type { Provider } from '@supabase/supabase-js'
 
 type AuthContextType = {
   session: Session | null
   user: User | null
   signOut: () => Promise<void>
-  login: (email: string, password: string) => Promise<void>
-  signUp: (email: string, password: string, fullName: string) => Promise<void>
+  sendMagicLink: (email: string, redirectTo?: string, fullName?: string) => Promise<void>
   loginWithProvider: (provider: Provider, options?: { redirectTo?: string }) => Promise<void>
 }
 
@@ -48,12 +47,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     await authSignOut()
   }
 
-  const login = async (email: string, password: string) => {
-    await authLogin(email, password)
-  }
-
-  const signUp = async (email: string, password: string, fullName: string) => {
-    await authSignUp(email, password, fullName)
+  const sendMagicLink = async (email: string, redirectTo?: string, fullName?: string) => {
+    await authSendMagicLink(email, redirectTo, fullName)
   }
 
   const loginWithProvider = async (provider: Provider, options?: { redirectTo?: string }) => {
@@ -61,7 +56,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <AuthContext.Provider value={{ session, user, signOut, login, signUp, loginWithProvider }}>
+    <AuthContext.Provider value={{ session, user, signOut, sendMagicLink, loginWithProvider }}>
       {children}
     </AuthContext.Provider>
   )

@@ -54,6 +54,26 @@ export async function login(email: string, password: string) {
   return { session: data.session, user: data.user };
 }
 
+export async function sendMagicLink(
+  email: string,
+  redirectTo?: string,
+  fullName?: string
+) {
+  const { data, error } = await supabase.auth.signInWithOtp({
+    email,
+    options: {
+      emailRedirectTo: redirectTo,
+      data: fullName ? { full_name: fullName } : undefined,
+    },
+  });
+
+  if (error) {
+    throw new Error(error.message || 'Error al enviar el enlace magico');
+  }
+
+  return data;
+}
+
 export async function signInWithProvider(
   provider: Provider,
   options?: { redirectTo?: string }

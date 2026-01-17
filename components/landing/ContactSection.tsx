@@ -31,20 +31,20 @@ export function ContactSection() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-neutral-950 via-neutral-900 to-indigo-950 py-24">
-      <div className="absolute -top-48 -right-40 h-80 w-80 rounded-full bg-indigo-600/30 blur-3xl" />
-      <div className="absolute -bottom-48 -left-40 h-72 w-72 rounded-full bg-purple-600/25 blur-3xl" />
+    <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-indigo-50 py-24 dark:from-neutral-950 dark:via-neutral-900 dark:to-indigo-950">
+      <div className="absolute -top-48 -right-40 h-80 w-80 rounded-full bg-indigo-300/40 blur-3xl dark:bg-indigo-600/30" />
+      <div className="absolute -bottom-48 -left-40 h-72 w-72 rounded-full bg-purple-300/30 blur-3xl dark:bg-purple-600/25" />
 
       <div className="relative mx-auto max-w-6xl px-6 lg:px-12">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_.9fr]">
           <div className="space-y-6">
-            <span className="inline-flex items-center rounded-full border border-indigo-500/40 bg-indigo-500/10 px-4 py-1 text-sm font-semibold text-indigo-300">
+            <span className="inline-flex items-center rounded-full border border-indigo-200 bg-indigo-50 px-4 py-1 text-sm font-semibold text-indigo-600 dark:border-indigo-500/40 dark:bg-indigo-500/10 dark:text-indigo-300">
               ¿Listo para hablar?
             </span>
-            <h2 className="text-3xl font-bold text-white md:text-4xl">
+            <h2 className="text-3xl font-bold text-slate-900 md:text-4xl dark:text-white">
               Conversemos sobre cómo IA Profesor puede acompañarte paso a paso en tu ruta de aprendizaje.
             </h2>
-            <p className="text-base text-slate-300 md:text-lg">
+            <p className="text-base text-slate-600 md:text-lg dark:text-slate-300">
               Escríbenos y te responderemos en menos de 24 horas para pensar
               juntos la mejor estrategia de aprendizaje asistido por IA.
             </p>
@@ -74,16 +74,16 @@ export function ContactSection() {
           </div>
 
           <div className="relative">
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-indigo-500/40 via-purple-500/30 to-blue-500/30 blur-xl" />
-            <div className="relative rounded-3xl border border-white/10 bg-neutral-900/80 p-8 shadow-2xl backdrop-blur">
-              <h3 className="text-xl font-semibold text-white">Enviar mensaje</h3>
-              <p className="mt-2 text-sm text-slate-300">
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-indigo-300/40 via-purple-300/30 to-blue-300/30 blur-xl dark:from-indigo-500/40 dark:via-purple-500/30 dark:to-blue-500/30" />
+            <div className="relative rounded-3xl border border-slate-200 bg-white/80 p-8 shadow-2xl backdrop-blur dark:border-white/10 dark:bg-neutral-900/80">
+              <h3 className="text-xl font-semibold text-slate-900 dark:text-white">Enviar mensaje</h3>
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
                 Completa el formulario y te responderemos a la brevedad.
               </p>
 
               <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
                 <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium text-slate-200">
+                  <label htmlFor="name" className="text-sm font-medium text-slate-700 dark:text-slate-200">
                     Nombre completo
                   </label>
                   <input
@@ -92,13 +92,13 @@ export function ContactSection() {
                     value={formState.name}
                     onChange={handleChange}
                     placeholder="Tu nombre"
-                    className="w-full rounded-xl border border-white/10 bg-neutral-800/80 px-4 py-3 text-sm text-slate-100 shadow-inner outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/40"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-inner outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/40 dark:border-white/10 dark:bg-neutral-800/80 dark:text-slate-100"
                     required
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium text-slate-200">
+                  <label htmlFor="email" className="text-sm font-medium text-slate-700 dark:text-slate-200">
                     Correo electrónico
                   </label>
                   <input
@@ -108,13 +108,13 @@ export function ContactSection() {
                     value={formState.email}
                     onChange={handleChange}
                     placeholder="tu@mail.com"
-                    className="w-full rounded-xl border border-white/10 bg-neutral-800/80 px-4 py-3 text-sm text-slate-100 shadow-inner outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/40"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-inner outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/40 dark:border-white/10 dark:bg-neutral-800/80 dark:text-slate-100"
                     required
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="message" className="text-sm font-medium text-slate-200">
+                  <label htmlFor="message" className="text-sm font-medium text-slate-700 dark:text-slate-200">
                     ¿Cómo podemos ayudarte?
                   </label>
                   <textarea
@@ -124,7 +124,7 @@ export function ContactSection() {
                     value={formState.message}
                     onChange={handleChange}
                     placeholder="Cuéntanos sobre tus objetivos educativos..."
-                    className="w-full rounded-xl border border-white/10 bg-neutral-800/80 px-4 py-3 text-sm text-slate-100 shadow-inner outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/40"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-inner outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/40 dark:border-white/10 dark:bg-neutral-800/80 dark:text-slate-100"
                     required
                   />
                 </div>
@@ -138,13 +138,13 @@ export function ContactSection() {
                 </button>
 
                 {status === "success" && (
-                  <p className="rounded-lg border border-green-500/40 bg-green-500/10 px-3 py-2 text-sm text-green-300">
+                  <p className="rounded-lg border border-green-500/30 bg-green-500/10 px-3 py-2 text-sm text-green-600 dark:border-green-500/40 dark:text-green-300">
                     ¡Gracias por escribirnos! Te responderemos muy pronto.
                   </p>
                 )}
 
                 {status === "error" && (
-                  <p className="rounded-lg border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm text-red-300">
+                  <p className="rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-600 dark:border-red-500/40 dark:text-red-300">
                     Revisa los datos ingresados e inténtalo nuevamente.
                   </p>
                 )}
@@ -167,13 +167,13 @@ function ContactCard({
   description: string;
 }) {
   return (
-    <div className="flex items-start gap-3 rounded-2xl border border-white/10 bg-neutral-900/70 p-4 shadow-lg backdrop-blur transition hover:-translate-y-1 hover:shadow-2xl">
-      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-600/30 text-indigo-200">
+    <div className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-white/80 p-4 shadow-lg backdrop-blur transition hover:-translate-y-1 hover:shadow-2xl dark:border-white/10 dark:bg-neutral-900/70">
+      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 text-indigo-700 dark:bg-indigo-600/30 dark:text-indigo-200">
         {icon}
       </div>
       <div>
-        <h4 className="text-sm font-semibold text-white">{title}</h4>
-        <p className="text-sm text-slate-300">{description}</p>
+        <h4 className="text-sm font-semibold text-slate-900 dark:text-white">{title}</h4>
+        <p className="text-sm text-slate-600 dark:text-slate-300">{description}</p>
       </div>
     </div>
   );
